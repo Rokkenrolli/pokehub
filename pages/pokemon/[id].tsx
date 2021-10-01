@@ -13,16 +13,16 @@ const PokeView = ()=> {
   const { id } = router.query
   const [pokemons, setPokemons] = useState<IPokemon[] |undefined>(undefined)
   const [edit, setEdit] = useState(false)
-  const [splitmode, setSplitMode] = useState(false)
 
 
   useEffect( () => {
     if (!id) {
       return
     }
+    console.log(id)
     const inner = async () => {
        const pokemon = await getPokemon(String(id))
-       setPokemons([pokemon])
+       setPokemons(pokemon)
     }
     inner()
     },[id])
@@ -44,8 +44,15 @@ const PokeView = ()=> {
       ]
 
     return (
+      <div>
       <div className={styles.container}>
-        {pokemons && pokemons.map(pokemon => <Pokemon pokemon={pokemon} barOptions={{barColors:barColors, barBorders: borderColor}}  />)}
+        <div style={{flex:0,display:'flex'}}>
+        <input id="editToggle" type="checkbox" onClick={() => setEdit(!edit)} />
+        <label htmlFor="editToggle">Toggle edit mode</label>
+        </div>
+
+        {pokemons && pokemons.map((pokemon,i) => <Pokemon key={i} editMode={edit} pokemon={pokemon} barOptions={{barColors:barColors, barBorders: borderColor}}  />)}
+      </div>
       </div>
     )
 }
@@ -53,33 +60,42 @@ const PokeView = ()=> {
 interface PokeViewProps {
   pokemon:IPokemon
   barOptions: BarOptions
+  editMode?:boolean
 }
 interface BarOptions {
   barColors: string[]
   barBorders?: string[]
 }
 
-const Pokemon:React.FC<PokeViewProps> = ({pokemon, barOptions}) => {
- 
+const Pokemon:React.FC<PokeViewProps> = ({pokemon, barOptions, editMode}) => {
+  const [pokemonData,setPokemonData] = useState<IPokemon>(pokemon)
+
+  const changeValue = (e:string | null)=> {
+    if (!e) {
+      return
+    }
+    console.log(e)
+  }
+
   const statData = {
     label: "ability scores",
-    data: pokemon.stats.map(stat => stat.base_stat),
+    data: pokemonData.stats.map(stat => stat.base_stat),
     backgroundColor:barOptions.barColors,
     borderColor: barOptions.barBorders 
   }
 
-  const labels = pokemon.stats.map(stat => stat.stat.name)
+  const labels = pokemonData.stats.map(stat => stat.stat.name)
   const data = {
    labels: labels,
    datasets: [statData]
   }
   return <div className= {styles['pokemon-container']}>
-    <h1 className={styles.name}> Pokemon: {pokemon.name}</h1>
-    <h1 className={styles.index}> # {pokemon.id}</h1>
-    <h3 className={styles.height}> Height: {pokemon.height}'</h3>
-    <h3 className={styles.weight}> Weight: {pokemon.weight} lbs </h3> 
-    <img className={styles.image} src={pokemon.sprites.front_default} alt="sprite of the pokemon" />
-    <Bar className={styles.stats} data={data}  ></Bar>
+    <h1 className={styles.name}> Pokemon: <span onBlur={(e) => changeValue(e.currentTarget.textContent) } className={editMode ? styles.textActive:""} contentEditable={editMode}>{pokemonData.name}</span></h1>
+    <h1 className={styles.index}> #{<span className={editMode ? styles.textActive:""} contentEditable={editMode}>{pokemonData.id}</span>}</h1>
+    <h3 className={styles.height}> Height: {<span className={editMode ? styles.textActive:""} contentEditable={editMode}>{pokemonData.height}</span>}'</h3>
+    <h3 className={styles.weight}> Weight: {<span className={editMode ? styles.textActive:""} contentEditable={editMode}>{pokemonData.weight}</span>} lbs </h3> 
+    <img className={styles.image} src={pokemonData.sprites.front_default} alt="sprite of the pokemon" />
+    <Bar className={styles.stats} data={data}></Bar>
   </div>
 }
 

@@ -13,20 +13,20 @@ const Header: React.FC = () => {
   const [session, loading] = useSession();
 
   const SignOut = () => { 
-      return <button onClick={() => signOut()}>
+      return <button className={commons.button} onClick={() => signOut()}>
         <a>Log out</a>
         </button>
         }
     const SignIn = () => {
         return <Link href="/api/auth/signin">
-        <a data-active={isActive('/signup')}>Log in</a>
+        <a className={commons.button} data-active={isActive('/signup')}>Log in</a>
       </Link>
     }
   
 
   return (
     <nav className={commons['header-container']}>
-      {<HomeButton/>}
+      {!isActive('/') &&<HomeButton/>}
       <div>
       {session && <h2>Hello {session.user?.name}</h2>}
       {!session && <SignIn/>}

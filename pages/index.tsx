@@ -1,14 +1,14 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
 import React, { useState } from 'react'
-import Header from '../components/Header'
+import PokemonSearch from '../components/PokemonSearch'
+import commons from  '../styles/commons.module.css'
 
 const Home: NextPage = () => {
-  const [url, setUrl] = useState("")
+  
   return (
     
-    <div>
+    <div className={commons.container}>
       <Head>
         <title>Pokehub</title>
         <meta name="description" content="Tune your pokemons with ease" />
@@ -18,9 +18,8 @@ const Home: NextPage = () => {
         <h1>
           Welcome to Pokehub
         </h1>
-          <input type="text" onChange={(e) => setUrl(e.target.value)}/>
-          <Link href={`/pokemon/${url}`}><a> We are flying to {`/pokemon/${url}`}</a></Link>
-
+   
+        <PokemonSearch /> 
 
         
     </div>

@@ -1,8 +1,4 @@
 
-.container {
-display:grid;
-justify-content: center;
-}
 
 .pokemon-container {
 
@@ -16,6 +12,7 @@ justify-content: center;
                     "name index "
                     "height weight"
                     "stats stats"
+                    "stats stats"
                     "stats stats" ;
     grid-gap:1em;
     border: 2px solid grey;
@@ -23,8 +20,11 @@ justify-content: center;
     max-width:800px;
     justify-self: center;
 }
-.red{color:#be41e4}
 
+
+.textActive {
+    border: 1px solid black;
+}
 .name {
     grid-area: name;
 }
@@ -52,6 +52,15 @@ justify-content: center;
         "name index image image"
         "height weight image image"
         "stats stats stats stats" ;
+    }
+
+    .container {
+        display:flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .container > * {
+        flex:50%;
     }
 }
 

@@ -2,6 +2,6 @@
 import PokeAPI from "pokeapi-typescript";
 
 export const getPokemon = async( pokemon: string) => {
-    const response = await PokeAPI.Pokemon.resolve(pokemon);
+    const response = Promise.all(pokemon.split(',').map(async p => await PokeAPI.Pokemon.resolve(p.trim())));
     return response
 }
