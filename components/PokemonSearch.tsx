@@ -9,7 +9,7 @@ const PokemonSearch = () => {
 
     return  <div className={commons['search-container']}>
     <input type="text" placeholder="Search for a pokemon" onChange={(e) => setUrl(e.target.value)}/>
-    <button className={commons.button} disabled={Boolean(!url)} onClick={() =>router.push(`/pokemon/${url}`)}>Let's fly!</button>
+    <button className={commons.button} disabled={Boolean(!url)} onClick={() =>router.push(`/pokemon/${url}`)}>Let&#39;s fly!</button>
     </div>
 }
 
