@@ -1,0 +1,57 @@
+
+.container {
+display:grid;
+justify-content: center;
+}
+
+.pokemon-container {
+
+    display: grid;
+    margin: 2em;
+    margin-top:2em;
+    padding:1rem;
+    justify-content: center;
+    grid-template-areas:
+                    "image image" 
+                    "name index "
+                    "height weight"
+                    "stats stats"
+                    "stats stats" ;
+    grid-gap:1em;
+    border: 2px solid grey;
+    border-radius: 2em;
+    max-width:800px;
+    justify-self: center;
+}
+.red{color:#be41e4}
+
+.name {
+    grid-area: name;
+}
+.index {
+    grid-area: index;
+}
+.height {
+    grid-area: height;
+}
+.weight {
+    grid-area: weight;
+}
+.image {
+    grid-area:image;
+    
+}
+.stats {
+    grid-area: stats;
+    width:100%
+}
+
+@media screen and (min-width: 600px) {
+    .pokemon-container {
+        grid-template-areas:
+        "name index image image"
+        "height weight image image"
+        "stats stats stats stats" ;
+    }
+}
+
