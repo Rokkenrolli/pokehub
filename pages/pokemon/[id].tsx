@@ -91,7 +91,7 @@ const Pokemon:React.FC<PokeViewProps> = ({pokemon, barOptions, editMode}) => {
   }
   return <div className= {styles['pokemon-container']}>
     <h1 className={styles.name}> Pokemon: <span onBlur={(e) => changeValue(e.currentTarget.textContent) } className={editMode ? styles.textActive:""} contentEditable={editMode}>{pokemonData.name}</span></h1>
-    <h1 className={styles.index}> #{<span className={editMode ? styles.textActive:""} contentEditable={editMode}>{pokemonData.id}</span>}</h1>
+    <h1 className={styles.index}> #{pokemonData.id}</h1>
     <h3 className={styles.height}> Height: {<span className={editMode ? styles.textActive:""} contentEditable={editMode}>{pokemonData.height}</span>}&#39;</h3>
     <h3 className={styles.weight}> Weight: {<span className={editMode ? styles.textActive:""} contentEditable={editMode}>{pokemonData.weight}</span>} lbs </h3> 
     <img className={styles.image} src={pokemonData.sprites.front_default} alt="sprite of the pokemon" />

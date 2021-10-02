@@ -38,8 +38,8 @@
     border: 2px solid black;
 }
 
-.header-container > hgroup {
-    color:white
+.home-button {
+    justify-self: flex-start;
 }
 
 .search-container {

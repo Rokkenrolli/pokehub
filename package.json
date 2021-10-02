@@ -11,6 +11,7 @@
   "dependencies": {
     "@prisma/client": "^3.1.1",
     "chart.js": "^3.5.1",
+    "classnames": "^2.3.1",
     "next": "11.1.2",
     "next-auth": "^3.29.0",
     "pokeapi-typescript": "^2.1.0",

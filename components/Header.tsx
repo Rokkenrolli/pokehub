@@ -26,7 +26,7 @@ const Header: React.FC = () => {
 
   return (
     <div className={commons['header-container']}>
-      {!isActive('/') &&<HomeButton/>}
+      {!isActive('/') &&<HomeButton additionalClassname="home-button"/>}
       {session && <h4>{session.user?.name}</h4>}
       {session && <img className={commons['profile-pic']} src={session.user?.image ||""} alt="Profile picture"></img>}
       {!session && <SignIn/>}
