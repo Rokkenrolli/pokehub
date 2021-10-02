@@ -3,7 +3,7 @@
 import { useRouter } from 'next/router'
 import { IPokemon } from 'pokeapi-typescript'
 import { useEffect, useState } from 'react'
-import { getPokemon } from '../api/pokeapi'
+import { getPokemon } from '../api/pokemon/pokeapi'
 import styles from '../../styles/pokemon.module.css'
 import { Bar } from 'react-chartjs-2';
 

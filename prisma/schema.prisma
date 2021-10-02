@@ -18,7 +18,7 @@ model User {
   image         String?
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-
+  favourites    Int[]     
   @@map(name: "users")
 }
 
