@@ -25,14 +25,13 @@ const Header: React.FC = () => {
   
 
   return (
-    <nav className={commons['header-container']}>
+    <div className={commons['header-container']}>
       {!isActive('/') &&<HomeButton/>}
-      <div>
-      {session && <h2>Hello {session.user?.name}</h2>}
+      {session && <h4>{session.user?.name}</h4>}
+      {session && <img className={commons['profile-pic']} src={session.user?.image ||""} alt="Profile picture"></img>}
       {!session && <SignIn/>}
       {session && <SignOut/>}
-      </div>
-    </nav>
+    </div>
   );
 };
 

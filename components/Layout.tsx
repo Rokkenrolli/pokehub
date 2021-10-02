@@ -1,12 +1,12 @@
-import { ReactElement } from "react";
-import Header from "./Header";
 
+import Header from "./Header";
+import commons from  '../styles/commons.module.css'
 
 const Layout:React.FC = ({children}) => {
     return (
         <>
           <Header />
-          <main>{children}</main>
+          <div className={commons.main}>{children}</div>
         </>
       )
 }

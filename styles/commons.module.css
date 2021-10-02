@@ -7,6 +7,12 @@
     transition-duration: 0.4s;
     padding:0.5em;
     border-radius: 0.5rem;
+    background: #F5BD1F;
+    color:black;
+}
+
+.main {
+    padding-top: 5em;
 }
 
 .button:hover {
@@ -15,9 +21,25 @@
 
 .header-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     grid-gap:1em;
-    margin:1em;
+    background: rgba(135, 54, 170);
+    margin-bottom: 2em;
+    max-height: 50px;
+    align-items: center;
+    position: fixed;
+    width: 100%
+}
+
+.profile-pic {
+    max-width: 36px;
+    max-height: 36px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.header-container > hgroup {
+    color:white
 }
 
 .search-container {
