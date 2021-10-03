@@ -9,6 +9,7 @@
     border-radius: 0.5rem;
     background: #F5BD1F;
     color:black;
+    min-height: 30px;
 }
 
 .main {
@@ -44,6 +45,7 @@
     grid-gap:1em;
     justify-content: center;
     margin-right: auto;
+    max-height: 50px;
 }
 
 .profile-pic {
@@ -88,8 +90,6 @@
 
 .search-container {
     display: flex;
-    padding:2em;
-    margin:1em;
     grid-gap:0.5rem;
 }
 .search-container > input {

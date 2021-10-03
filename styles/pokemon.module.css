@@ -11,6 +11,7 @@
                     "image image" 
                     "name index "
                     "height weight"
+                    "ab ab"
                     "stats stats"
                     "stats stats"
                     "stats stats" ;
@@ -21,6 +22,14 @@
     justify-self: center;
 }
 
+.abilitiesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap:1em;
+}
+.abilities {
+    grid-area: ad;
+}
 
 .textActive {
     border: 1px solid black;
@@ -43,7 +52,8 @@
 }
 .stats {
     grid-area: stats;
-    width:100%
+    width:100%;
+    min-height:150px;
 }
 
 @media screen and (min-width: 600px) {
@@ -51,6 +61,7 @@
         grid-template-areas:
         "name index image image"
         "height weight image image"
+        "ab ab ab ab"
         "stats stats stats stats" ;
     }
 
