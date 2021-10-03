@@ -12,6 +12,7 @@
                     "name index "
                     "height weight"
                     "ab ab"
+                    "type type"
                     "stats stats"
                     "stats stats"
                     "stats stats" ;
@@ -28,11 +29,15 @@
     grid-gap:1em;
 }
 .abilities {
-    grid-area: ad;
+    grid-area: ab;
 }
 
 .textActive {
     border: 1px solid black;
+}
+
+.type {
+    grid-area: type;
 }
 .name {
     grid-area: name;
@@ -61,7 +66,7 @@
         grid-template-areas:
         "name index image image"
         "height weight image image"
-        "ab ab ab ab"
+        "ab ab type type"
         "stats stats stats stats" ;
     }
 

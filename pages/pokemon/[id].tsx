@@ -146,8 +146,8 @@ const Pokemon: React.FC<PokeViewProps> = ({
         src={pokemonData.sprites.front_default}
         alt="sprite of the pokemon"
       />
-      <div>
-        <h2 className={styles.abilities}>Abilities</h2>
+      <div className={styles.abilities}>
+        <h2>Abilities</h2>
         <p>
           *(<i>Hidden ability</i>)
         </p>
@@ -165,6 +165,22 @@ const Pokemon: React.FC<PokeViewProps> = ({
           ))}
         </div>
       </div>
+      <div className={styles.type}>
+        <h2>Types</h2>
+        <div className={styles.abilitiesContainer}>
+          {pokemonData.types.map((t, i) => (
+            <h4 key={i}>
+              <span
+                className={editMode ? styles.textActive : ""}
+                contentEditable={editMode}
+              >
+                {t.type.name}
+              </span>
+            </h4>
+          ))}
+        </div>
+      </div>
+
       <Bar className={styles.stats} data={data}></Bar>
     </div>
   );
