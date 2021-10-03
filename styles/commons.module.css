@@ -53,6 +53,7 @@
     max-height: 36px;
     border-radius: 50%;
     border: 2px solid black;
+    cursor: pointer;
 }
 
 .profileSub {
@@ -64,12 +65,14 @@
 
 @keyframes openDown {
     0% {
-        transform: scaleY(0);
+        transform: scale(0);
+        display: none;
     }
     100% {
-        transform: scaleY(100%);
+        transform: scale(100%);
     }
 }
+
 
 .profile {
     position: fixed;
@@ -81,8 +84,16 @@
     padding-bottom: 0.2em;
     background-color: rgba(135, 54, 170);
     border-radius:0.8em;
-    animation: openDown 0.2s ease-in-out;
+    animation: openDown 0.2s ease-in;
+    transform-origin: top right;
 }
+.closed {
+    animation: openDown reverse ease-out 0.2s forwards;
+}
+.hidden {
+    display: none;
+}
+
 .home-button {
     justify-self: flex-start;
     align-self: flex-start;

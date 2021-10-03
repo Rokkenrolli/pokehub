@@ -4,7 +4,7 @@ import { signOut, useSession } from "next-auth/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import commons from "../styles/commons.module.css";
 
 interface ProfileProps {
@@ -12,17 +12,20 @@ interface ProfileProps {
 }
 
 export const Profile: React.FC<ProfileProps> = ({ profile }) => {
-  const [session, loading] = useSession();
   const router = useRouter();
   const [isOpen, toggleOpen] = useState(false);
+  const [firstTimeClicked, setClicked] = useState(false);
   const isActive: (pathname: string) => boolean = (pathname) =>
     router.pathname === pathname;
 
   const handleToggle = () => {
-    console.log(isOpen);
+    !firstTimeClicked && setClicked(true);
     toggleOpen(!isOpen);
   };
-
+  useEffect(() => {
+    setClicked(false);
+    toggleOpen(false);
+  }, [router.pathname]);
   const SignOut = () => {
     return (
       <button
@@ -36,7 +39,12 @@ export const Profile: React.FC<ProfileProps> = ({ profile }) => {
 
   const ProfileScreen = () => {
     return (
-      <div className={commons.profile}>
+      <div
+        className={classnames(commons.profile, {
+          [commons.closed]: !isOpen,
+          [commons.hidden]: !firstTimeClicked,
+        })}
+      >
         <Link href={"/favourites"}>
           <a>Favourites</a>
         </Link>
@@ -56,7 +64,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile }) => {
           src={profile.user?.image || ""}
           alt="Profile picture"
         ></img>
-        {isOpen && <ProfileScreen />}
+        <ProfileScreen />
       </div>
     </div>
   );
