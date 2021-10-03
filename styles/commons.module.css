@@ -28,7 +28,22 @@
     max-height: 50px;
     align-items: center;
     position: fixed;
-    width: 100%
+    width: 100%;
+    min-height:50px;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    grid-gap:1em;
+    align-items: center;
+}
+
+.container-flex {
+    display: flex;
+    grid-gap:1em;
+    justify-content: center;
+    margin-right: auto;
 }
 
 .profile-pic {
@@ -38,8 +53,37 @@
     border: 2px solid black;
 }
 
+.profileSub {
+    display: flex;
+    grid-gap:1em;
+    align-items: center;
+    margin-right:1em;
+}
+
+@keyframes openDown {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(100%);
+    }
+}
+
+.profile {
+    position: fixed;
+    align-self: flex-end;
+    display:flex;
+    flex-direction:column;
+    margin-top:2.8em;
+    padding: 1em;
+    padding-bottom: 0.2em;
+    background-color: rgba(135, 54, 170);
+    border-radius:0.8em;
+    animation: openDown 0.2s ease-in-out;
+}
 .home-button {
     justify-self: flex-start;
+    align-self: flex-start;
 }
 
 .search-container {
@@ -59,4 +103,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.end {
+    align-self: flex-end;
 }
