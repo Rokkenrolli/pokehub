@@ -7,12 +7,15 @@ import { Bar } from "react-chartjs-2";
 import Image from "next/image";
 import star from "../../public/star.png";
 import classnames from "classnames";
+import { useSession } from "next-auth/client";
+import { Session } from "next-auth";
 
 const PokeView = () => {
   const router = useRouter();
   const { id } = router.query;
   const [pokemons, setPokemons] = useState<IPokemon[] | undefined>(undefined);
   const [edit, setEdit] = useState(false);
+  const [session, loading] = useSession();
 
   useEffect(() => {
     if (!id) {
@@ -58,6 +61,7 @@ const PokeView = () => {
         {pokemons &&
           pokemons.map((pokemon, i) => (
             <Pokemon
+              session={session}
               favorited={false}
               key={i}
               editMode={edit}
@@ -71,6 +75,7 @@ const PokeView = () => {
 };
 
 interface PokeViewProps {
+  session?: Session;
   pokemon: IPokemon;
   barOptions: BarOptions;
   editMode?: boolean;
@@ -86,6 +91,7 @@ const Pokemon: React.FC<PokeViewProps> = ({
   barOptions,
   editMode,
   favorited,
+  session,
 }) => {
   const [pokemonData, setPokemonData] = useState<IPokemon>(pokemon);
   const [favorite, setFavorited] = useState(favorited);
@@ -118,12 +124,15 @@ const Pokemon: React.FC<PokeViewProps> = ({
   };
   return (
     <div className={styles["pokemon-container"]}>
-      <div
-        className={classnames(styles.fav, {
-          [styles.star]: favorite,
-        })}
-        onClick={() => setFavorite(!favorite)}
-      ></div>
+      {session && (
+        <div
+          className={classnames(styles.fav, {
+            [styles.star]: favorite,
+          })}
+          onClick={() => setFavorite(!favorite)}
+        ></div>
+      )}
+
       <h1 className={styles.name}>
         {" "}
         <span
