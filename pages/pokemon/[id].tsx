@@ -22,7 +22,7 @@ const PokeView = () => {
     const inner = async () => {
       const pokemon = await getPokemon(String(id));
 
-      setPokemons(pokemon.reverse());
+      setPokemons(pokemon);
     };
     inner();
   }, [id]);
@@ -44,7 +44,7 @@ const PokeView = () => {
     "rgba(255, 159, 64, 1)",
   ];
 
-  return (
+  return pokemons && pokemons.length ? (
     <div>
       <div style={{ padding: "1em" }}>
         <div className={styles.edit}>
@@ -59,18 +59,22 @@ const PokeView = () => {
       </div>
 
       <div className={styles.container}>
-        {pokemons &&
-          pokemons.map((pokemon, i) => (
-            <Pokemon
-              session={session ?? undefined}
-              favorited={false}
-              key={i}
-              editMode={edit}
-              pokemon={pokemon}
-              barOptions={{ barColors: barColors, barBorders: borderColor }}
-            />
-          ))}
+        {pokemons.map((pokemon, i) => (
+          <Pokemon
+            session={session ?? undefined}
+            favorited={false}
+            key={i}
+            editMode={edit}
+            pokemon={pokemon}
+            barOptions={{ barColors: barColors, barBorders: borderColor }}
+          />
+        ))}
       </div>
+    </div>
+  ) : (
+    <div style={{ padding: "3em" }}>
+      <h1>We did not find any pokemon, please check your search</h1>
+      <PokemonSearch />
     </div>
   );
 };
