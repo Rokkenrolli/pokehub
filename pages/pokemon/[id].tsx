@@ -43,8 +43,9 @@ const PokeView = () => {
     "rgba(153, 102, 255, 1)",
     "rgba(255, 159, 64, 1)",
   ];
-
-  return pokemons && pokemons.length ? (
+  const foundPokemon = Boolean(pokemons && pokemons.length);
+  // console.log(`foundpokemon ${foundPokemon}`);
+  return foundPokemon ? (
     <div>
       <div style={{ padding: "1em" }}>
         <div className={styles.edit}>
@@ -59,16 +60,21 @@ const PokeView = () => {
       </div>
 
       <div className={styles.container}>
-        {pokemons.map((pokemon, i) => (
-          <Pokemon
-            session={session ?? undefined}
-            favorited={false}
-            key={i}
-            editMode={edit}
-            pokemon={pokemon}
-            barOptions={{ barColors: barColors, barBorders: borderColor }}
-          />
-        ))}
+        {pokemons?.map((pokemon, i) => {
+          if (!pokemon) {
+            return;
+          }
+          return (
+            <Pokemon
+              session={session ?? undefined}
+              favorited={false}
+              key={i}
+              editMode={edit}
+              pokemon={pokemon}
+              barOptions={{ barColors: barColors, barBorders: borderColor }}
+            />
+          );
+        })}
       </div>
     </div>
   ) : (
