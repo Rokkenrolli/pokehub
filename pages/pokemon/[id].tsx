@@ -1,9 +1,12 @@
 import { useRouter } from "next/router";
 import { IPokemon } from "pokeapi-typescript";
-import { useEffect, useState } from "react";
+import { Component, useEffect, useState } from "react";
 import { getPokemon } from "../api/pokemon/pokeapi";
 import styles from "../../styles/pokemon.module.css";
 import { Bar } from "react-chartjs-2";
+import Image from "next/image";
+import star from "../../public/star.png";
+import classnames from "classnames";
 
 const PokeView = () => {
   const router = useRouter();
@@ -55,6 +58,7 @@ const PokeView = () => {
         {pokemons &&
           pokemons.map((pokemon, i) => (
             <Pokemon
+              favorited={false}
               key={i}
               editMode={edit}
               pokemon={pokemon}
@@ -70,6 +74,7 @@ interface PokeViewProps {
   pokemon: IPokemon;
   barOptions: BarOptions;
   editMode?: boolean;
+  favorited: boolean;
 }
 interface BarOptions {
   barColors: string[];
@@ -80,14 +85,23 @@ const Pokemon: React.FC<PokeViewProps> = ({
   pokemon,
   barOptions,
   editMode,
+  favorited,
 }) => {
   const [pokemonData, setPokemonData] = useState<IPokemon>(pokemon);
-
-  const changeValue = (e: string | null) => {
+  const [favorite, setFavorited] = useState(favorited);
+  const changeValue = (e: string | null, key: string) => {
     if (!e) {
       return;
     }
+    const keys = key.split(",").map((k) => k.trim());
+    console.log(keys);
     console.log(e);
+  };
+
+  const setFavorite = (fav: boolean) => {
+    console.log("setting favourite to ", fav);
+    setFavorited(fav);
+    //api call TODO
   };
 
   const statData = {
@@ -104,10 +118,16 @@ const Pokemon: React.FC<PokeViewProps> = ({
   };
   return (
     <div className={styles["pokemon-container"]}>
+      <div
+        className={classnames(styles.fav, {
+          [styles.star]: favorite,
+        })}
+        onClick={() => setFavorite(!favorite)}
+      ></div>
       <h1 className={styles.name}>
         {" "}
         <span
-          onBlur={(e) => changeValue(e.currentTarget.textContent)}
+          onBlur={(e) => changeValue(e.currentTarget.textContent, "name")}
           className={editMode ? styles.textActive : ""}
           contentEditable={editMode}
         >
