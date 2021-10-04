@@ -61,7 +61,7 @@ const PokeView = () => {
         {pokemons &&
           pokemons.map((pokemon, i) => (
             <Pokemon
-              session={session}
+              session={session ?? undefined}
               favorited={false}
               key={i}
               editMode={edit}
