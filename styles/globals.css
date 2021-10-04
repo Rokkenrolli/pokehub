@@ -5,6 +5,8 @@ body {
   font-family: Montserrat, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   --background-color:white;
+  --primary-color: rgba(135, 54, 170);
+  --secondary-color: 245, 189, 31;
 }
 
 a {

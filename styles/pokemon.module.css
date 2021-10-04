@@ -18,11 +18,12 @@
                     "stats stats"
                     "stats stats" ;
     grid-gap:1em;
-    border: 2px solid grey;
+    border: 2px solid var(--primary-color);
     border-radius: 2em;
     max-width:800px;
     justify-self: center;
     align-items: center;
+    background-color: rgba(var(--secondary-color), 0.2);
 }
 
 .abilitiesContainer {
@@ -35,7 +36,11 @@
 }
 
 .textActive {
-    border: 1px solid black;
+    border: 1px solid var(--primary-color);
+}
+.edit {
+    max-height: 50px;
+    margin: 0.4em;
 }
 
 .type {
@@ -59,6 +64,7 @@
     
 }
 .stats {
+    border-top: 2px solid var(--primary-color);
     grid-area: stats;
     width:100%;
     min-height:150px;

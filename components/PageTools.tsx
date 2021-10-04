@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import HomeButton from "./HomeButton";
 import commons from "../styles/commons.module.css";
+import PokemonSearch from "./PokemonSearch";
 
 export const PageTools: React.FC = ({ children }) => {
   const router = useRouter();
