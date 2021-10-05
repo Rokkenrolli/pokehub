@@ -11,12 +11,18 @@ const PokemonSearch = () => {
     router.push(`/pokemon/${id ? id + "," : ""}${url}`);
     setUrl("");
   };
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleClick();
+    }
+  };
   return (
     <div className={commons["search-container"]}>
       <input
         type="text"
         placeholder="Search for a pokemon"
         onChange={(e) => setUrl(e.target.value)}
+        onKeyPress={(e) => handleKeyPress(e)}
         value={url}
       />
       <button
