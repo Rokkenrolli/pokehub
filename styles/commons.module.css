@@ -20,6 +20,11 @@
     border-radius: 0.5rem;
 }
 
+.disabled {
+    cursor: not-allowed;
+    background: rgba(var(--secondary-color), 0.2);
+}
+
 .secondaryButton:hover {
     background-color: rgba(var(--secondary-color), 0.7);
     transition: background-color 0.2s ease-in-out;

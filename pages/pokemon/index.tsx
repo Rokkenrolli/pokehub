@@ -42,12 +42,13 @@ const PokemonHome: NextPage<PokemonProps> = ({
   interface PageProps {
     pageNumber: number;
     text: string;
+    disabled?: boolean;
   }
-  const NextPage: React.FC<PageProps> = ({ pageNumber, text }) => {
+  const NextPage: React.FC<PageProps> = ({ pageNumber, text, disabled }) => {
     return (
       <button
         onClick={() => handlePageChange(pageNumber)}
-        className={commons.button}
+        className={classnames(commons.button, { [commons.disabled]: disabled })}
       >
         {text}
       </button>
@@ -57,13 +58,18 @@ const PokemonHome: NextPage<PokemonProps> = ({
   const PageChanger = () => {
     return (
       <div className={classnames(commons.flex, commons.pageContainer)}>
-        {page !== 0 && (
-          <NextPage pageNumber={page - 1} text={"Previous Page"} />
-        )}
-        {page}
-        {page !== lastPageNumber && (
-          <NextPage pageNumber={page + 1} text={"Next Page"} />
-        )}
+        <NextPage
+          disabled={page <= 0}
+          pageNumber={page - 1}
+          text={"Previous Page"}
+        />
+        <p>{page}</p>
+
+        <NextPage
+          disabled={page >= lastPageNumber}
+          pageNumber={page + 1}
+          text={"Next Page"}
+        />
       </div>
     );
   };
