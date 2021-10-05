@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { IPokemon } from "pokeapi-typescript";
 import { Component, useEffect, useState } from "react";
-import { getPokemon } from "../api/pokemon/pokeapi";
+import { getPokemon, listAll } from "../api/pokemon/pokeapi";
 import styles from "../../styles/pokemon.module.css";
 import { useSession } from "next-auth/client";
 import Pokemon from "../../components/Pokemon";
@@ -10,7 +10,7 @@ import PokemonSearch from "../../components/PokemonSearch";
 const PokeView = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [pokemons, setPokemons] = useState<IPokemon[] | undefined>(undefined);
+  const [pokemons, setPokemons] = useState<IPokemon[]>([]);
   const [edit, setEdit] = useState(false);
   const [session, loading] = useSession();
 
@@ -18,11 +18,21 @@ const PokeView = () => {
     if (!id) {
       return;
     }
+
     console.log(id);
     const inner = async () => {
-      const pokemon = await getPokemon(String(id));
-
-      setPokemons(pokemon);
+      const pokes = await Promise.allSettled(
+        String(id)
+          .split(",")
+          .map(async (p) => await getPokemon(String(p)))
+      );
+      const filtered: IPokemon[] = [];
+      pokes.forEach((p) => {
+        if (p.status === "fulfilled") {
+          filtered.push(p.value);
+        }
+      });
+      setPokemons(filtered);
     };
     inner();
   }, [id]);
