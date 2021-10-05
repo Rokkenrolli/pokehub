@@ -1,8 +1,16 @@
 {
   "/_app": "pages/_app.js",
+  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
+  "/api/favourite/[id]": "pages/api/favourite/[id].js",
+  "/api/pokemon/pokeapi": "pages/api/pokemon/pokeapi.js",
+  "/api/post/[id]": "pages/api/post/[id].js",
+  "/api/post": "pages/api/post.js",
+  "/api/user/user": "pages/api/user/user.js",
+  "/favourites": "pages/favourites.js",
+  "/": "pages/index.html",
+  "/pokemon/[id]": "pages/pokemon/[id].html",
+  "/pokemon": "pages/pokemon.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/pokemon/[id]": "pages/pokemon/[id].js",
-  "/favourites": "pages/favourites.js",
-  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js"
+  "/404": "pages/404.html"
 }
