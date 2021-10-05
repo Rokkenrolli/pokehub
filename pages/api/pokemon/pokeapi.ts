@@ -1,6 +1,8 @@
 
 import PokeAPI, { IPokemon } from "pokeapi-typescript";
 
+const baseUrl = `http://localhost:3000/`
+
 export const getPokemons = async( pokemonString: string) => {
     const pokemons:IPokemon[] = []
     pokemonString.split(',').forEach(async (p,i) => {
@@ -24,9 +26,17 @@ export const listAll = async () => {
 
 
 export const unfavourite = async (id:number) => {
-        await fetch(`http://localhost:3000/api/post/${id}`, {
+        await fetch(`${baseUrl}api/post/${id}`, {
           method: 'DELETE',
         });
+}
+
+export const isFavourite = async (id:number) => {
+    const res = await fetch(`${baseUrl}api/favourite/${id}`)
+    const body = await res.json()
+
+    
+    return body.isFavourite
 }
 
 

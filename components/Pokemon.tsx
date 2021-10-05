@@ -1,10 +1,11 @@
 import { Session } from "next-auth";
 import classnames from "classnames";
 import { IPokemon } from "pokeapi-typescript";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import styles from "../styles/pokemon.module.css";
-import { unfavourite } from "../pages/api/pokemon/pokeapi";
+import { isFavourite, unfavourite } from "../pages/api/pokemon/pokeapi";
+import { GetServerSideProps } from "next";
 
 export interface BarOptions {
   barColors: string[];
@@ -15,7 +16,7 @@ export interface PokeViewProps {
   pokemon: IPokemon;
   barOptions: BarOptions;
   editMode?: boolean;
-  favorited: boolean;
+  favorited?: boolean;
 }
 const Pokemon: React.FC<PokeViewProps> = ({
   pokemon,
@@ -26,6 +27,16 @@ const Pokemon: React.FC<PokeViewProps> = ({
 }) => {
   const [pokemonData, setPokemonData] = useState<IPokemon>(pokemon);
   const [favorite, setFavorited] = useState(favorited);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fav = await isFavourite(pokemon.id);
+      console.log(fav);
+      setFavorited(fav);
+    };
+    fetchData();
+  });
+
   const changeValue = (e: string | null, key: string) => {
     if (!e) {
       return;

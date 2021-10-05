@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
   const favourites = await prisma.favourite.findMany({
     where: {
-      author: { email: session.user?.email },
+      idUser: Number(session["userId"]),
     },
   });
   return { props: { favourites: favourites } };
