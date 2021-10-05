@@ -16,13 +16,14 @@ const Home: NextPage = () => {
       </Head>
 
       <h1>Welcome to Pokehub</h1>
+      <PokemonSearch />
+      <h3>All Pokemons</h3>
       <button
-        className={commons.button}
+        className={commons.secondaryButton}
         onClick={() => router.push("/pokemon")}
       >
         Pokemons
       </button>
-      <PokemonSearch />
     </div>
   );
 };

@@ -12,6 +12,19 @@
     min-height: 30px;
 }
 
+.secondaryButton {
+    margin:1em;
+    border: 2px solid rgba(var(--primary-color));
+    padding:1em;
+    background-color: rgba(var(--secondary-color),0.3);
+    border-radius: 0.5rem;
+}
+
+.secondaryButton:hover {
+    background-color: rgba(var(--secondary-color), 0.7);
+    transition: background-color 0.2s ease-in-out;
+}
+
 .pageContainer {
     display: flex;
     grid-gap:1em;
@@ -126,3 +139,4 @@
 .end {
     align-self: flex-end;
 }
+
