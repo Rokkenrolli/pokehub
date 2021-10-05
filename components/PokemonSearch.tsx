@@ -7,17 +7,22 @@ const PokemonSearch = () => {
   const router = useRouter();
   const { id } = router.query;
 
+  const handleClick = () => {
+    router.push(`/pokemon/${id ? id + "," : ""}${url}`);
+    setUrl("");
+  };
   return (
     <div className={commons["search-container"]}>
       <input
         type="text"
         placeholder="Search for a pokemon"
         onChange={(e) => setUrl(e.target.value)}
+        value={url}
       />
       <button
         className={commons.button}
         disabled={Boolean(!url)}
-        onClick={() => router.push(`/pokemon/${id ? id + "," : ""}${url}`)}
+        onClick={() => handleClick()}
       >
         Let&#39;s fly!
       </button>
