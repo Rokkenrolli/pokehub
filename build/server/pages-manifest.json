@@ -1,0 +1,13 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/pokemon/[id]": "pages/pokemon/[id].js",
+  "/": "pages/index.js",
+  "/favourites": "pages/favourites.js",
+  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
+  "/api/post": "pages/api/post.js",
+  "/pokemon": "pages/pokemon.js",
+  "/api/post/[id]": "pages/api/post/[id].js",
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
+}

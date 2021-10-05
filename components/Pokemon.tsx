@@ -4,6 +4,7 @@ import { IPokemon } from "pokeapi-typescript";
 import React, { useState } from "react";
 import { Bar } from "react-chartjs-2";
 import styles from "../styles/pokemon.module.css";
+import { unfavourite } from "../pages/api/pokemon/pokeapi";
 
 export interface BarOptions {
   barColors: string[];
@@ -34,10 +35,23 @@ const Pokemon: React.FC<PokeViewProps> = ({
     console.log(e);
   };
 
-  const setFavorite = (fav: boolean) => {
+  const setFavorite = async (fav: boolean) => {
     console.log("setting favourite to ", fav);
     setFavorited(fav);
-    //api call TODO
+    if (fav) {
+      try {
+        const body = { id: pokemon.id, name: pokemon.name, url: "" };
+        await fetch("/api/post", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      unfavourite(pokemon.id);
+    }
   };
 
   const statData = {
@@ -59,7 +73,7 @@ const Pokemon: React.FC<PokeViewProps> = ({
           className={classnames(styles.fav, {
             [styles.star]: favorite,
           })}
-          onClick={() => setFavorite(!favorite)}
+          onClick={async () => await setFavorite(!favorite)}
         ></div>
       )}
 

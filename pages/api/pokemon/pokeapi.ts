@@ -21,3 +21,12 @@ export const listAll = async () => {
     const all = await PokeAPI.Pokemon.listAll()
     return all;
 }
+
+
+export const unfavourite = async (id:number) => {
+        await fetch(`http://localhost:3000/api/post/${id}`, {
+          method: 'DELETE',
+        });
+}
+
+
