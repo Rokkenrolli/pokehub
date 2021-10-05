@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/client";
-import HomeButton from "./HomeButton";
+import HomeButton from "./buttons/HomeButton";
 import commons from "../styles/commons.module.css";
 import { Profile } from "./Profile";
 import { PageTools } from "./PageTools";

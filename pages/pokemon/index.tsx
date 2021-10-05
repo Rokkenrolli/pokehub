@@ -6,6 +6,7 @@ import styles from "../../styles/pokemon.module.css";
 import { listAll } from "../api/pokemon/pokeapi";
 import commons from "../../styles/commons.module.css";
 import classnames from "classnames";
+import { PokemonIcon } from "../../components/PokemonIcon";
 
 export interface PokemonProps {
   pokemons: INamedApiResource<IPokemon>[];
@@ -79,19 +80,6 @@ const PokemonHome: NextPage<PokemonProps> = ({
         ))}
       </div>
       <PageChanger />
-    </div>
-  );
-};
-
-export const PokemonIcon: React.FC<INamedApiResource<IPokemon>> = (pokemon) => {
-  const router = useRouter();
-
-  return (
-    <div
-      className={styles.pokemonIcon}
-      onClick={() => router.push(`/pokemon/${pokemon.name}`)}
-    >
-      {pokemon.name}
     </div>
   );
 };

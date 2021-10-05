@@ -99,10 +99,15 @@
     border-radius:1em;
     padding:0.5em;
     margin:0.5em;
+
 }
 
 .pokemonIcon:hover {
     background-color:rgba(var(--primary-color), 0.2);
+}
+.iconText {
+    border-bottom:2px solid  rgba(var(--primary-color), 1);
+    font-size: 1em;
 }
 
 .pokefilter {
@@ -135,6 +140,7 @@
     .pokemonIcon {
         margin:1em;
         padding:1em;
+
     }
     .container {
         display:flex;
