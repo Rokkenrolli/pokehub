@@ -12,12 +12,14 @@ export interface PokemonProps {
   pokemons: INamedApiResource<IPokemon>[];
   pageSize?: number;
   startPage?: number;
+  title?: string;
 }
 
 const PokemonHome: NextPage<PokemonProps> = ({
   pokemons,
   pageSize = 100,
   startPage = 0,
+  title = "Pokemons",
 }) => {
   const [visiblePokemons, setPokemon] = useState<INamedApiResource<IPokemon>[]>(
     pokemons.slice(
@@ -68,10 +70,7 @@ const PokemonHome: NextPage<PokemonProps> = ({
 
   return (
     <div style={{ display: "grid" }}>
-      <h2 style={{ justifySelf: "center", fontSize: "28px" }}>
-        {" "}
-        Pokemons Listed
-      </h2>
+      <h2 style={{ justifySelf: "center", fontSize: "28px" }}> {title}</h2>
       <PageChanger />
 
       <div className={styles.iconContainer}>

@@ -27,11 +27,12 @@ const PokeView = () => {
           .map(async (p) => await getPokemon(String(p)))
       );
       const filtered: IPokemon[] = [];
-      pokes.forEach((p) => {
+      pokes.forEach((p, i) => {
         if (p.status === "fulfilled") {
           filtered.push(p.value);
         }
       });
+
       setPokemons(filtered);
     };
     inner();

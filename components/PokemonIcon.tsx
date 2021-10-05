@@ -21,7 +21,7 @@ export const PokemonIcon: React.FC<INamedApiResource<IPokemon>> = (pokemon) => {
       onClick={() => router.push(`/pokemon/${pokemon.name}`)}
     >
       <p className={styles.iconText}>{pokemon.name}</p>
-      {iconUrl && <img src={iconUrl} alt="sprite" />}
+      {iconUrl && <img width={96} height={96} src={iconUrl} alt="sprite" />}
     </div>
   );
 };

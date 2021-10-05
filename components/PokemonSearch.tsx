@@ -8,6 +8,10 @@ const PokemonSearch = () => {
   const { id } = router.query;
 
   const handleClick = () => {
+    const parsed = url.trim();
+    if (!url) {
+      return;
+    }
     router.push(`/pokemon/${id ? id + "," : ""}${url}`);
     setUrl("");
   };
