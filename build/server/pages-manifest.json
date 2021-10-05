@@ -2,8 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
-  "/api/favourite/[id]": "pages/api/favourite/[id].js",
   "/pokemon/[id]": "pages/pokemon/[id].js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
+  "/favourites": "pages/favourites.js",
+  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js"
 }

@@ -1,7 +1,7 @@
 
 import PokeAPI, { IPokemon } from "pokeapi-typescript";
 
-const baseUrl = `http://localhost:3000/`
+const baseUrl = `https://pokehub-silk.vercel.app/`
 
 export const getPokemons = async( pokemonString: string) => {
     const pokemons:IPokemon[] = []

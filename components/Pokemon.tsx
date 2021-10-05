@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import styles from "../styles/pokemon.module.css";
 import { isFavourite, unfavourite } from "../pages/api/pokemon/pokeapi";
-import { GetServerSideProps } from "next";
 
 export interface BarOptions {
   barColors: string[];
