@@ -25,9 +25,9 @@ const Favourite:React.FC<FavouriteProps> = ({pokemonId, name}) => {
           setFavorited(fav);
           
         };
-        fetchData();
+        if (session)fetchData();
         setLoading(false)
-      });
+      },[pokemonId]);
 
 
       if (!session) {
