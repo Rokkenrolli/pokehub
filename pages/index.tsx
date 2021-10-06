@@ -1,7 +1,7 @@
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import React, { useState } from "react";
-import PokemonSearch from "../components/PokemonSearch";
+import PokemonSearch from "../components/pokemon/PokemonSearch";
 import commons from "../styles/commons.module.css";
 import { listAll } from "./api/pokemon/pokeapi";
 import { useRouter } from "next/router";

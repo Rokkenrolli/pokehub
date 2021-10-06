@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import commons from "../styles/commons.module.css";
+import commons from "../../styles/commons.module.css";
 
 interface ProfileProps {
   profile: Session;

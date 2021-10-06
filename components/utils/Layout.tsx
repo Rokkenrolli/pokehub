@@ -1,6 +1,6 @@
 
 import Header from "./Header";
-import commons from  '../styles/commons.module.css'
+import commons from  '../../styles/commons.module.css'
 
 const Layout:React.FC = ({children}) => {
     return (

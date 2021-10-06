@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import HomeButton from "./buttons/HomeButton";
-import commons from "../styles/commons.module.css";
-import BackButton from "./buttons/BackButton";
+import HomeButton from "../buttons/HomeButton";
+import commons from "../../styles/commons.module.css";
+import BackButton from "../buttons/BackButton";
 
 export const PageTools: React.FC = ({ children }) => {
   const router = useRouter();

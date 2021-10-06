@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import commons from "../styles/commons.module.css";
+import commons from "../../styles/commons.module.css";
 
 const PokemonSearch = () => {
   const [url, setUrl] = useState("");

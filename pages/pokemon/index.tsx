@@ -6,7 +6,7 @@ import styles from "../../styles/pokemon.module.css";
 import { listAll } from "../api/pokemon/pokeapi";
 import commons from "../../styles/commons.module.css";
 import classnames from "classnames";
-import { PokemonIcon } from "../../components/PokemonIcon";
+import { PokemonIcon } from "../../components/pokemon/PokemonIcon";
 
 export interface PokemonProps {
   pokemons: INamedApiResource<IPokemon>[];

@@ -3,8 +3,8 @@ import classnames from "classnames";
 import { IPokemon } from "pokeapi-typescript";
 import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import styles from "../styles/pokemon.module.css";
-import { isFavourite, unfavourite } from "../pages/api/pokemon/pokeapi";
+import styles from "../../styles/pokemon.module.css";
+import Favourite from "../utils/Favourite";
 
 export interface BarOptions {
   barColors: string[];
@@ -21,20 +21,10 @@ const Pokemon: React.FC<PokeViewProps> = ({
   pokemon,
   barOptions,
   editMode,
-  favorited,
-  session,
 }) => {
   const [pokemonData, setPokemonData] = useState<IPokemon>(pokemon);
-  const [favorite, setFavorited] = useState(favorited);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const fav = await isFavourite(pokemon.id);
-      console.log(fav);
-      setFavorited(fav);
-    };
-    fetchData();
-  });
+ 
 
   const changeValue = (e: string | null, key: string) => {
     if (!e) {
@@ -45,24 +35,7 @@ const Pokemon: React.FC<PokeViewProps> = ({
     console.log(e);
   };
 
-  const setFavorite = async (fav: boolean) => {
-    console.log("setting favourite to ", fav);
-    setFavorited(fav);
-    if (fav) {
-      try {
-        const body = { id: pokemon.id, name: pokemon.name, url: "" };
-        await fetch("/api/post", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      unfavourite(pokemon.id);
-    }
-  };
+
 
   const statData = {
     label: "ability scores",
@@ -78,15 +51,8 @@ const Pokemon: React.FC<PokeViewProps> = ({
   };
   return (
     <div className={styles["pokemon-container"]}>
-      {session && (
-        <div
-          className={classnames(styles.fav, {
-            [styles.star]: favorite,
-          })}
-          onClick={async () => await setFavorite(!favorite)}
-        ></div>
-      )}
-
+      
+      <Favourite pokemonId={pokemon.id} name={pokemon.name} />
       <h1 className={styles.name}>
         {" "}
         <span

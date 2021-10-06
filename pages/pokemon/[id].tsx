@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import { IPokemon } from "pokeapi-typescript";
 import { Component, useEffect, useState } from "react";
-import { getPokemon, isFavourite, listAll } from "../api/pokemon/pokeapi";
+import { getPokemon,} from "../api/pokemon/pokeapi";
 import styles from "../../styles/pokemon.module.css";
 import { useSession } from "next-auth/client";
-import Pokemon from "../../components/Pokemon";
-import PokemonSearch from "../../components/PokemonSearch";
+import Pokemon from "../../components/pokemon/Pokemon";
+import PokemonSearch from "../../components/pokemon/PokemonSearch";
 
 const PokeView = () => {
   const router = useRouter();

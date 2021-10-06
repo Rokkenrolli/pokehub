@@ -31,7 +31,7 @@ export const unfavourite = async (id:number) => {
         });
 }
 
-export const isFavourite = async (id:number) => {
+export const isFavourite = async (id:number):Promise<boolean> => {
     const res = await fetch(`${baseUrl}api/favourite/${id}`)
     const body = await res.json()
 
