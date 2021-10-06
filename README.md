@@ -1,6 +1,6 @@
 ## Welcome to Pokehub.
 
-To view a working version without account database and thus without features such as favouriting, visit [Pokehub](https://pokehub-silk.vercel.app/)
+To view a working version without account database and thus without features such as favouriting, visit [Pokehub](https://pokehub-silk.vercel.app/).
 To gain access to all functions, or run the project locally, see below. 
 
 
