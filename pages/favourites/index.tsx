@@ -15,7 +15,7 @@ const FavoritePage: NextPage<Props> = ({ favourites }) => {
     <div className={styles["profile-container"]}>
       {session && <h1>Your favourites, {session.user?.name}</h1>}
       {!session && <h1>Something went wrong</h1>}
-      <div style={{display:"grid"}}>
+      <div style={{display:"grid",gridAutoFlow:"column",margin:"1em"}}>
       {favourites.map((f, i) => {
         return <PokemonIcon key={i} name={f.pokemonName} url={f.pokemonUrl}/>;
       })}

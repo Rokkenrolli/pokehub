@@ -45,9 +45,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile }) => {
           [commons.hidden]: !firstTimeClicked,
         })}
       >
-        <Link href={"/favourites"}>
-          <a>Favourites</a>
-        </Link>
+        <button className={commons.button} onClick={() => router.push("/favourites")}>Favourites</button>
         <SignOut />
       </div>
     );

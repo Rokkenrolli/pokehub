@@ -1,15 +1,13 @@
 import { PrismaClient } from '@prisma/client'
 
+// add prisma to the NodeJS global type
+
+// Prevent multiple instances of Prisma Client in development
 declare global {
-  var prisma: PrismaClient
+  var prisma:PrismaClient
 }
+const prisma = global.prisma || new PrismaClient()
 
- const prisma =
-  global.prisma ||
-  new PrismaClient({
-    log: ['query'],
-  })
-
- global.prisma = prisma
+if (process.env.NODE_ENV === 'development') global.prisma = prisma
 
 export default prisma
