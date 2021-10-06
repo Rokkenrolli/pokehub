@@ -12,15 +12,17 @@ export interface FavouriteProps {
 const Favourite:React.FC<FavouriteProps> = ({pokemonId, name}) => {
     const session = useSession()
     const [favorite, setFavorited] = useState(false);
-
+    const [loading,  setLoading] = useState(false)
 
     useEffect(() => {
+        setLoading(true)
         const fetchData = async () => {
           const fav = await isFavourite(pokemonId);
           console.log(fav);
           setFavorited(fav);
         };
         fetchData();
+        setLoading(false)
       });
 
     const setFavorite = async (fav: boolean) => {
@@ -44,7 +46,7 @@ const Favourite:React.FC<FavouriteProps> = ({pokemonId, name}) => {
 
 
     return (<>
-    {session && (
+    {(session && !loading) && (
         <div
           className={classnames(styles.fav, {
             [styles.star]: favorite,
