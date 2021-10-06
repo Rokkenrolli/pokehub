@@ -42,12 +42,13 @@
 }
 
 .spinner {
-    border-top: 8px solid rgba(var(--primary-color));
+    justify-self: center;
     border-radius: 50%;
     width: 32px;
     height: 32px;
     animation: spin 2s linear infinite;
     border: 8px solid #f3f3f3; 
+    border-top: 8px solid rgba(var(--primary-color));
 }
 
 @keyframes spin {
