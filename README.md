@@ -1,6 +1,6 @@
-Welcome to Pokehub.
+## Welcome to Pokehub.
 
-To view a working version without account database and thus without features such as favouriting, visit [https://pokehub-silk.vercel.app/](Pokehub)
+To view a working version without account database and thus without features such as favouriting, visit [Pokehub](https://pokehub-silk.vercel.app/)
 To gain access to all functions, or run the project locally, see below. 
 
 
@@ -32,17 +32,17 @@ GITHUB_SECRET=
 NEXTAUTH_URL=http://localhost:3000/api/auth
 ```
 
-To  create db tables,use
+To  create db tables:
 ``` bash
 npx prisma db push
 npx prisma generate
 ``` 
 
-First, run the development server:
+Start development server:
 
 ```bash
 npm run dev
 ```
 
-You should now have working version on [http://localhost:3000](localhost)
+You should now have working version on [localhost](http://localhost:3000)
 
