@@ -3,6 +3,7 @@ import { useSession } from "next-auth/client"
 import { useState, useEffect } from "react"
 import { isFavourite, unfavourite } from "../../pages/api/pokemon/pokeapi"
 import styles from "../../styles/pokemon.module.css"
+import LoadingSpinner from "./LoadingSpinner"
 
 export interface FavouriteProps {
     pokemonId:number
@@ -43,10 +44,13 @@ const Favourite:React.FC<FavouriteProps> = ({pokemonId, name}) => {
         }
         setFavorited(await isFavourite(pokemonId))
       };
-
+     
+    if (!session) {
+        return <></>
+    }  
 
     return (<>
-    {(session && !loading) && (
+    {(!loading) && (
         <div
           className={classnames(styles.fav, {
             [styles.star]: favorite,
@@ -54,6 +58,7 @@ const Favourite:React.FC<FavouriteProps> = ({pokemonId, name}) => {
           onClick={async () => await setFavorite(!favorite)}
         ></div>
       )}
+      {loading && <LoadingSpinner/>}
       </>)
 
 }
