@@ -8,6 +8,9 @@ import prisma from '../../../lib/prisma';
 const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, options);
 export default authHandler;
 
+const sessionMinutes = 5
+const updateMinutes = 4
+
 const options = {
   providers: [
     Providers.GitHub({
@@ -20,6 +23,11 @@ const options = {
       session.userId = user.id;    
       return Promise.resolve(session);
     }
+  },
+  session : {
+    jwt:false,
+    maxAge: 60 *sessionMinutes,
+    updateAge: 60* updateMinutes
   },
   
   adapter: Adapters.Prisma.Adapter({ prisma }),
