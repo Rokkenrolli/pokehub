@@ -31,8 +31,8 @@ const PokemonSearch:React.FC<SearchProps> = ({pokemonList = [], useAutocomplete=
 
   const Autocomplete = () => {
     const handleAutoClick = (pokemon:string) => {
-      setUrl(pokemon)
       setPokemons([])
+      handleClick(pokemon)
     }
 
     return<div className={commons.autocompleteContainer}>
@@ -42,8 +42,8 @@ const PokemonSearch:React.FC<SearchProps> = ({pokemonList = [], useAutocomplete=
     </div>
   }
 
-  const handleClick = () => {
-    const parsed = url.trim();
+  const handleClick = (search:string) => {
+    const parsed = search.trim();
     if (!parsed) {
       return;
     }
@@ -52,7 +52,7 @@ const PokemonSearch:React.FC<SearchProps> = ({pokemonList = [], useAutocomplete=
   };
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleClick();
+      handleClick(url);
     }
   };
 
@@ -73,7 +73,7 @@ const PokemonSearch:React.FC<SearchProps> = ({pokemonList = [], useAutocomplete=
       <button
         className={commons.button}
         disabled={Boolean(!url)}
-        onClick={() => handleClick()}
+        onClick={() => handleClick(url)}
       >
         {searchText}
       </button>

@@ -35,6 +35,7 @@ const Favourite:React.FC<FavouriteProps> = ({pokemonId, name}) => {
     } 
     const setFavorite = async (fav: boolean) => {
         console.log("setting favourite to ", fav);
+        setFavorited(fav)
         if (fav) {
           await favourite(pokemonId, name, "")
         } else {
