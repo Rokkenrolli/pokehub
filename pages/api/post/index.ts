@@ -2,6 +2,7 @@
 import { NextApiHandler } from 'next';
 import { Session } from 'next-auth';
 import { getSession } from 'next-auth/client';
+import prisma from '../../../lib/prisma';
 
 
 // POST /api/post
