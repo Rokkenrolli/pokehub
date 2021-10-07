@@ -144,11 +144,38 @@
     display: flex;
     grid-gap:0.5rem;
 }
-.search-container > input {
+.search-container input {
+    justify-self: center;
     border-radius: 0.5rem;
     padding: 0.5em;
 }
 
+.autocompleteContainer{
+    display: grid;
+    position: absolute;
+    border: rgb(var(--primary-color)) 2px solid;
+    top: 100%;
+    margin:4px;
+    justify-items: center;
+    max-height: 150px;
+    overflow-y: scroll;
+    width: 100%;
+    border-radius:0.5em;
+    z-index: 5;
+    background: white;
+}
+.autocompleterow  {
+    border-bottom: 2px solid rgb(var(--primary-color));
+    cursor: pointer;
+    width: 100%;
+    text-align: center; 
+    padding: 1em;
+    margin: 0;
+
+}
+.autocompleterow:hover {
+ background-color: rgba(var(--primary-color) ,.2);
+}
 
 .container {
     display: flex;

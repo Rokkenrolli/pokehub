@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { signOut, useSession } from "next-auth/client";
+import { signIn, signOut, useSession } from "next-auth/client";
 import HomeButton from "../buttons/HomeButton";
 import commons from "../../styles/commons.module.css";
 import { Profile } from "./Profile";
@@ -15,11 +15,7 @@ const Header: React.FC = () => {
 
   const SignIn = () => {
     return (
-      <Link href="/api/auth/signin">
-        <a className={commons.button} data-active={isActive("/signup")}>
-          Log in
-        </a>
-      </Link>
+      <button className={commons.button} onClick={() => signIn()}>Sign In</button>
     );
   };
 

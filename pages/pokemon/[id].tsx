@@ -1,13 +1,19 @@
 import { useRouter } from "next/router";
-import { IPokemon } from "pokeapi-typescript";
+import { INamedApiResource, IPokemon } from "pokeapi-typescript";
 import { Component, useEffect, useState } from "react";
-import { getPokemon,} from "../api/pokemon/pokeapi";
+import { getPokemon, listAll,} from "../api/pokemon/pokeapi";
 import styles from "../../styles/pokemon.module.css";
 import { useSession } from "next-auth/client";
 import Pokemon from "../../components/pokemon/Pokemon";
 import PokemonSearch from "../../components/pokemon/PokemonSearch";
+import { GetServerSideProps, GetStaticProps, NextPage } from "next";
 
-const PokeView = () => {
+
+interface Props {
+  pokemonList: INamedApiResource<IPokemon>[]
+}
+
+const PokeView:NextPage<Props> = ({pokemonList}) => {
   const router = useRouter();
   const { id } = router.query;
   const [pokemons, setPokemons] = useState<IPokemon[]>([]);
@@ -67,7 +73,7 @@ const PokeView = () => {
           />
           <label htmlFor="editToggle">Toggle edit mode</label>
         </div>
-        <PokemonSearch />
+        <PokemonSearch useAutocomplete={true} pokemonList={pokemonList} />
       </div>
 
       <div className={styles.container}>
@@ -90,9 +96,14 @@ const PokeView = () => {
   ) : (
     <div style={{ padding: "3em" }}>
       <h1>We did not find any pokemon, please check your search</h1>
-      <PokemonSearch />
+      <PokemonSearch useAutocomplete={true} pokemonList={pokemonList} />
     </div>
   );
 };
+
+export const getServerSideProps:GetServerSideProps = async()=> {
+  const pokemon = await listAll()
+  return {props: {pokemonList: pokemon.results}}
+}
 
 export default PokeView;

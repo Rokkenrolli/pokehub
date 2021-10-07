@@ -7,11 +7,11 @@ To gain access to all functions, or run the project locally, see below.
 ## Prerequisites
     * Github account
     * Create OAuth app on github
-        * settings
-        * developer settings
-        * OAuth app
-        * new OAuth app
-        * set authorization callback url to localhost:3000/api/auth
+        * settings ->
+        * developer settings ->
+        * OAuth app -> 
+        * new OAuth app -> 
+        * set authorization callback url to localhost:3000/api/auth 
     * Host a postgres database of own choice e.g in heroku or elephantsql 
     * Node
 
@@ -27,8 +27,8 @@ npm install
 create .env file and add following variables:
 ```
 DATABASE_URL=""
-GITHUB_ID=
-GITHUB_SECRET=
+GITHUB_ID=your OAuth clientid
+GITHUB_SECRET=your OAuth clientsecret
 NEXTAUTH_URL=http://localhost:3000/api/auth
 ```
 

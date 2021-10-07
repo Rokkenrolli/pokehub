@@ -1,12 +1,17 @@
-import type { GetStaticProps, NextPage } from "next";
+import  {  GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import React, { useState } from "react";
 import PokemonSearch from "../components/pokemon/PokemonSearch";
 import commons from "../styles/commons.module.css";
 import { listAll } from "./api/pokemon/pokeapi";
 import { useRouter } from "next/router";
+import { INamedApiResource, IPokemon } from "pokeapi-typescript";
 
-const Home: NextPage = () => {
+interface Props {
+  pokemon: INamedApiResource<IPokemon>[]
+}
+
+const Home: NextPage<Props> = ({pokemon}) => {
   const router = useRouter();
   return (
     <div className={commons.container}>
@@ -16,7 +21,7 @@ const Home: NextPage = () => {
       </Head>
 
       <h1>Welcome to Pokehub</h1>
-      <PokemonSearch />
+      <PokemonSearch pokemonList={pokemon} useAutocomplete={true}/>
       <h3>All Pokemons</h3>
       <button
         className={commons.secondaryButton}
@@ -27,5 +32,11 @@ const Home: NextPage = () => {
     </div>
   );
 };
+
+export const getStaticProps:GetStaticProps = async() => {
+
+  const pokemon = await listAll()
+  return {props: {pokemon: pokemon.results}}
+}
 
 export default Home;

@@ -1,18 +1,52 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { INamedApiResource, IPokemon } from "pokeapi-typescript";
+import { useRef, useState } from "react";
 import commons from "../../styles/commons.module.css";
 
-const PokemonSearch = () => {
+interface SearchProps {
+  pokemonList?: INamedApiResource<IPokemon>[]
+  useAutocomplete?: boolean
+}
+
+const PokemonSearch:React.FC<SearchProps> = ({pokemonList = [], useAutocomplete=false}) => {
   const [url, setUrl] = useState("");
   const router = useRouter();
   const { id } = router.query;
+  const [pokemons, setPokemons] = useState<INamedApiResource<IPokemon>[]>([])
+
+
+
+  const handleValueChange = (s:string) => {
+      const search = s.trim()
+      if (!search) {
+        setUrl("")
+        setPokemons([])
+        return
+      }
+      const newPokemon = pokemonList.filter(p=> p.name.slice(0,search.length).toLowerCase() === search.toLowerCase())
+      setPokemons(newPokemon)
+      setUrl(s)
+  }
+
+  const Autocomplete = () => {
+    const handleAutoClick = (pokemon:string) => {
+      setUrl(pokemon)
+      setPokemons([])
+    }
+
+    return<div className={commons.autocompleteContainer}>
+      {pokemons.map((p,i) => {
+        return <p className={commons.autocompleterow} key={i} onClick={() => handleAutoClick(p.name)}>{p.name}</p>
+      })}
+    </div>
+  }
 
   const handleClick = () => {
     const parsed = url.trim();
-    if (!url) {
+    if (!parsed) {
       return;
     }
-    router.push(`/pokemon/${id ? id + "," : ""}${url}`);
+    router.push(`/pokemon/${id ? id + "," : ""}${parsed}`);
     setUrl("");
   };
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -20,15 +54,21 @@ const PokemonSearch = () => {
       handleClick();
     }
   };
+
+
+
   return (
     <div className={commons["search-container"]}>
+      <div style={{display:"grid",position:"relative"}}>
       <input
         type="text"
         placeholder="Search for a pokemon"
-        onChange={(e) => setUrl(e.target.value)}
+        onChange={(e) => handleValueChange(e.target.value)}
         onKeyPress={(e) => handleKeyPress(e)}
         value={url}
       />
+      {(useAutocomplete && pokemons.length>0) &&<Autocomplete/>}
+      </div>
       <button
         className={commons.button}
         disabled={Boolean(!url)}
