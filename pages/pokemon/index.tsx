@@ -1,5 +1,4 @@
 import { GetStaticProps, GetStaticPropsResult, NextPage } from "next";
-import { useRouter } from "next/router";
 import { INamedApiResource, IPokemon } from "pokeapi-typescript";
 import { useState } from "react";
 import styles from "../../styles/pokemon.module.css";
@@ -21,22 +20,16 @@ const PokemonHome: NextPage<PokemonProps> = ({
   startPage = 0,
   title = "Pokemons",
 }) => {
-  const [visiblePokemons, setPokemon] = useState<INamedApiResource<IPokemon>[]>(
-    pokemons.slice(
-      startPage * pageSize,
-      Math.min(startPage * pageSize + pageSize, pokemons.length)
-    )
-  );
+  const [search, setSearch] = useState("")
+  const [visiblePokemons, setPokemon] = useState<INamedApiResource<IPokemon>[]>(pokemons);
+  
   //console.log("pokemons", pokemons, visiblePokemons, startPage, pageSize);
   const [page, setPage] = useState(startPage);
-  const lastPageNumber = Math.floor(pokemons.length / pageSize);
+  const lastPageNumber = Math.floor(visiblePokemons.length / pageSize);
 
   const handlePageChange = (pageNumber: number) => {
     const clamped = Math.max(0, Math.min(pageNumber, lastPageNumber));
     setPage(clamped);
-    setPokemon(
-      pokemons.slice(clamped * pageSize, clamped * pageSize + pageSize)
-    );
   };
 
   interface PageProps {
@@ -74,13 +67,27 @@ const PokemonHome: NextPage<PokemonProps> = ({
     );
   };
 
+  const handleFilter = (value:string) => {
+    const trimmed= value.trim()
+    const newPokemon = pokemons.filter(p => {
+      return p.name.includes(trimmed)
+    })
+    setPage(0)
+    setSearch(trimmed)
+    setPokemon(newPokemon)
+  }
+
   return (
     <div style={{ display: "grid" }}>
       <h2 style={{ justifySelf: "center", fontSize: "28px" }}> {title}</h2>
       <PageChanger />
-
+      <input className={commons.filter} type="text" placeholder="filter pokemon" onChange={(e) => handleFilter(e.target.value)} value={search}/>
       <div className={styles.iconContainer}>
-        {visiblePokemons.map((pokemon, i) => (
+        {visiblePokemons
+        .slice(
+            page * pageSize,
+            Math.min(page * pageSize + pageSize, pokemons.length)
+        ).map((pokemon, i) => (
           <PokemonIcon key={i} {...pokemon} />
         ))}
       </div>

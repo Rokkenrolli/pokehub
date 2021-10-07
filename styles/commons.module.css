@@ -150,6 +150,14 @@
     padding: 0.5em;
 }
 
+.filter {
+    padding:1em;
+    width:100%;
+    max-width:300px;
+    margin-left:3em;
+    border-radius: 0.5em;
+}
+
 .autocompleteContainer{
     display: grid;
     position: absolute;

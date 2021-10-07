@@ -11,6 +11,7 @@ interface Props {
 
 const FavoritePage: NextPage<Props> = ({ favourites }) => {
   const [session, loading] = useSession();
+
   return (
     <div className={styles["profile-container"]}>
       {session && <h1>Your favourites, {session.user?.name}</h1>}
