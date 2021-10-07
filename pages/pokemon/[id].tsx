@@ -73,7 +73,7 @@ const PokeView:NextPage<Props> = ({pokemonList}) => {
           />
           <label htmlFor="editToggle">Toggle edit mode</label>
         </div>
-        <PokemonSearch useAutocomplete={true} pokemonList={pokemonList} />
+        <PokemonSearch useAutocomplete={true} pokemonList={pokemonList} searchText={"Add another Pokemon"} />
       </div>
 
       <div className={styles.container}>

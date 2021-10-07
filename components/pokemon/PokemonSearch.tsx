@@ -6,9 +6,10 @@ import commons from "../../styles/commons.module.css";
 interface SearchProps {
   pokemonList?: INamedApiResource<IPokemon>[]
   useAutocomplete?: boolean
+  searchText?: string
 }
 
-const PokemonSearch:React.FC<SearchProps> = ({pokemonList = [], useAutocomplete=false}) => {
+const PokemonSearch:React.FC<SearchProps> = ({pokemonList = [], useAutocomplete=false,searchText = "Let's fly!"}) => {
   const [url, setUrl] = useState("");
   const router = useRouter();
   const { id } = router.query;
@@ -74,7 +75,7 @@ const PokemonSearch:React.FC<SearchProps> = ({pokemonList = [], useAutocomplete=
         disabled={Boolean(!url)}
         onClick={() => handleClick()}
       >
-        Let&#39;s fly!
+        {searchText}
       </button>
     </div>
   );

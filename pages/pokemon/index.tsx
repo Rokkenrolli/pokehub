@@ -63,7 +63,7 @@ const PokemonHome: NextPage<PokemonProps> = ({
           pageNumber={page - 1}
           text={"Previous Page"}
         />
-        <p>{page}</p>
+        <p>{page+1} ... {lastPageNumber +1}</p>
 
         <NextPage
           disabled={page >= lastPageNumber}
