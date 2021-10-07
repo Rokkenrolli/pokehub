@@ -1,6 +1,6 @@
 ## Welcome to Pokehub.
 
-To view a hosted version [Pokehub](https://pokehub-silk.vercel.app/).
+To view a hosted version, visit [Pokehub](https://pokehub-silk.vercel.app/).
 To run the project locally, see below. 
 
 
