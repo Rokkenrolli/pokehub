@@ -1,7 +1,7 @@
 
 import PokeAPI, { IPokemon } from "pokeapi-typescript";
 
-const baseUrl =process.env.NODE_ENV === "development"?"http://localhost:3000/" :`https://pokehub-silk.vercel.app/`
+const baseUrl =process.env.NODE_ENV === "development"?"http://localhost:3000" :`https://pokehub-silk.vercel.app`
 
 export const getPokemons = async( pokemonString: string) => {
     const pokemons:IPokemon[] = []
@@ -26,13 +26,25 @@ export const listAll = async () => {
 
 
 export const unfavourite = async (id:number) => {
-        await fetch(`${baseUrl}api/post/${id}`, {
+        await fetch(`${baseUrl}/api/post/${id}`, {
           method: 'DELETE',
         });
 }
 
+export const favourite = async(id:number, name:string, url:string) => {
+    try {
+        const body = { id: id, name: name, url: url };
+        await fetch(`${baseUrl}/api/post`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+      } catch (error) {
+        console.error(error);
+      }
+}
 export const isFavourite = async (id:number):Promise<boolean> => {
-    const res = await fetch(`${baseUrl}api/favourite/${id}`)
+    const res = await fetch(`${baseUrl}/api/favourite/${id}`)
     const body = await res.json()
 
     

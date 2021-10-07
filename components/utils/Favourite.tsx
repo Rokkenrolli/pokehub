@@ -1,7 +1,7 @@
 import classnames from "classnames"
 import { useSession } from "next-auth/client"
 import { useState, useEffect } from "react"
-import { isFavourite, unfavourite } from "../../pages/api/pokemon/pokeapi"
+import { favourite, isFavourite, unfavourite } from "../../pages/api/pokemon/pokeapi"
 import styles from "../../styles/pokemon.module.css"
 import LoadingSpinner from "./LoadingSpinner"
 
@@ -36,16 +36,7 @@ const Favourite:React.FC<FavouriteProps> = ({pokemonId, name}) => {
     const setFavorite = async (fav: boolean) => {
         console.log("setting favourite to ", fav);
         if (fav) {
-          try {
-            const body = { id: pokemonId, name: name, url: "" };
-            await fetch("/api/post", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(body),
-            });
-          } catch (error) {
-            console.error(error);
-          }
+          await favourite(pokemonId, name, "")
         } else {
           await unfavourite(pokemonId);
         }
