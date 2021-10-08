@@ -103,6 +103,10 @@
 
 }
 
+.iconActive {
+    background-color:rgba(var(--primary-color), 0.2);
+
+}
 .pokemonIcon:hover {
     background-color:rgba(var(--primary-color), 0.2);
 }

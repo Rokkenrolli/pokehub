@@ -6,6 +6,7 @@ import { listAll } from "../api/pokemon/pokeapi";
 import commons from "../../styles/commons.module.css";
 import classnames from "classnames";
 import { PokemonIcon } from "../../components/pokemon/PokemonIcon";
+import router from "next/router";
 
 export interface PokemonProps {
   pokemons: INamedApiResource<IPokemon>[];
@@ -23,7 +24,10 @@ const PokemonHome: NextPage<PokemonProps> = ({
   const [search, setSearch] = useState("");
   const [visiblePokemons, setPokemon] =
     useState<INamedApiResource<IPokemon>[]>(pokemons);
-
+  const [isMultiSelect, setMultiSelect] = useState(false);
+  const [multiSelected, changeMultiselected] = useState<Map<string, boolean>>(
+    new Map()
+  );
   //console.log("pokemons", pokemons, visiblePokemons, startPage, pageSize);
   const [page, setPage] = useState(startPage);
   const lastPageNumber = Math.floor(visiblePokemons.length / pageSize);
@@ -80,10 +84,63 @@ const PokemonHome: NextPage<PokemonProps> = ({
     setPokemon(newPokemon);
   };
 
+  const handleMultiSelect = (s: string) => {
+    const value = !Boolean(multiSelected.get(s));
+    const temp = multiSelected;
+    temp.set(s, value);
+    changeMultiselected(temp);
+    console.log(multiSelected);
+    return value;
+  };
+
+  const toggleMultiSelect = (next: boolean) => {
+    if (!next) {
+      changeMultiselected(new Map());
+    }
+
+    setMultiSelect(next);
+  };
+
+  const ConfirmButton = () => {
+    return (
+      <button
+        className={commons.button}
+        onClick={() =>
+          router.push(
+            `/pokemon/${Array.from(multiSelected.keys())
+              .filter((s) => multiSelected.get(s))
+              .join(",")}`
+          )
+        }
+      >
+        Confirm multiselection
+      </button>
+    );
+  };
+
   return (
     <div style={{ display: "grid" }}>
       <h2 style={{ justifySelf: "center", fontSize: "28px" }}> {title}</h2>
       <PageChanger />
+      <div
+        style={{
+          display: "grid",
+          gridAutoFlow: "column",
+          justifyContent: "flex-start",
+          gridGap: "0.5em",
+          marginLeft: "3em",
+          marginBottom: "0.5em",
+          alignItems: "center",
+        }}
+      >
+        <input
+          id="multiselect"
+          type="checkbox"
+          onClick={() => toggleMultiSelect(!isMultiSelect)}
+        />
+        <label htmlFor="multiselect">Toggle multiselect</label>
+        {isMultiSelect && <ConfirmButton />}
+      </div>
       <input
         className={commons.filter}
         type="text"
@@ -98,7 +155,13 @@ const PokemonHome: NextPage<PokemonProps> = ({
             Math.min(page * pageSize + pageSize, pokemons.length)
           )
           .map((pokemon, i) => (
-            <PokemonIcon key={i} {...pokemon} />
+            <PokemonIcon
+              key={i}
+              multiselection={isMultiSelect}
+              multiChangeFunction={handleMultiSelect}
+              pokemon={pokemon}
+              initialSelected={multiSelected.get(pokemon.name)}
+            />
           ))}
       </div>
       <PageChanger />
