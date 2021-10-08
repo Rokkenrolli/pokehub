@@ -1,19 +1,18 @@
 import { useRouter } from "next/router";
 import { INamedApiResource, IPokemon } from "pokeapi-typescript";
 import { Component, useEffect, useState } from "react";
-import { getPokemon, listAll,} from "../api/pokemon/pokeapi";
+import { getPokemon, listAll } from "../api/pokemon/pokeapi";
 import styles from "../../styles/pokemon.module.css";
 import { useSession } from "next-auth/client";
 import Pokemon from "../../components/pokemon/Pokemon";
 import PokemonSearch from "../../components/pokemon/PokemonSearch";
 import { GetServerSideProps, GetStaticProps, NextPage } from "next";
 
-
 interface Props {
-  pokemonList: INamedApiResource<IPokemon>[]
+  pokemonList: INamedApiResource<IPokemon>[];
 }
 
-const PokeView:NextPage<Props> = ({pokemonList}) => {
+const PokeView: NextPage<Props> = ({ pokemonList }) => {
   const router = useRouter();
   const { id } = router.query;
   const [pokemons, setPokemons] = useState<IPokemon[]>([]);
@@ -65,7 +64,7 @@ const PokeView:NextPage<Props> = ({pokemonList}) => {
   return foundPokemon ? (
     <div>
       <div style={{ padding: "1em" }}>
-        <div className={styles.edit}>
+        <div className={styles.edit} style={{ display: "none" }}>
           <input
             id="editToggle"
             type="checkbox"
@@ -73,7 +72,11 @@ const PokeView:NextPage<Props> = ({pokemonList}) => {
           />
           <label htmlFor="editToggle">Toggle edit mode</label>
         </div>
-        <PokemonSearch useAutocomplete={true} pokemonList={pokemonList} searchText={"Add another Pokemon"} />
+        <PokemonSearch
+          useAutocomplete={true}
+          pokemonList={pokemonList}
+          searchText={"Add another Pokemon"}
+        />
       </div>
 
       <div className={styles.container}>
@@ -101,9 +104,9 @@ const PokeView:NextPage<Props> = ({pokemonList}) => {
   );
 };
 
-export const getServerSideProps:GetServerSideProps = async()=> {
-  const pokemon = await listAll()
-  return {props: {pokemonList: pokemon.results}}
-}
+export const getServerSideProps: GetServerSideProps = async () => {
+  const pokemon = await listAll();
+  return { props: { pokemonList: pokemon.results } };
+};
 
 export default PokeView;

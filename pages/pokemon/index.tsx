@@ -20,9 +20,10 @@ const PokemonHome: NextPage<PokemonProps> = ({
   startPage = 0,
   title = "Pokemons",
 }) => {
-  const [search, setSearch] = useState("")
-  const [visiblePokemons, setPokemon] = useState<INamedApiResource<IPokemon>[]>(pokemons);
-  
+  const [search, setSearch] = useState("");
+  const [visiblePokemons, setPokemon] =
+    useState<INamedApiResource<IPokemon>[]>(pokemons);
+
   //console.log("pokemons", pokemons, visiblePokemons, startPage, pageSize);
   const [page, setPage] = useState(startPage);
   const lastPageNumber = Math.floor(visiblePokemons.length / pageSize);
@@ -56,7 +57,9 @@ const PokemonHome: NextPage<PokemonProps> = ({
           pageNumber={page - 1}
           text={"Previous Page"}
         />
-        <p>{page+1} ... {lastPageNumber +1}</p>
+        <p>
+          {page + 1} ... {lastPageNumber + 1}
+        </p>
 
         <NextPage
           disabled={page >= lastPageNumber}
@@ -67,29 +70,36 @@ const PokemonHome: NextPage<PokemonProps> = ({
     );
   };
 
-  const handleFilter = (value:string) => {
-    const trimmed= value.trim()
-    const newPokemon = pokemons.filter(p => {
-      return p.name.includes(trimmed)
-    })
-    setPage(0)
-    setSearch(trimmed)
-    setPokemon(newPokemon)
-  }
+  const handleFilter = (value: string) => {
+    const trimmed = value.toLowerCase().trim();
+    const newPokemon = pokemons.filter((p) => {
+      return p.name.toLowerCase().includes(trimmed);
+    });
+    setPage(0);
+    setSearch(trimmed);
+    setPokemon(newPokemon);
+  };
 
   return (
     <div style={{ display: "grid" }}>
       <h2 style={{ justifySelf: "center", fontSize: "28px" }}> {title}</h2>
       <PageChanger />
-      <input className={commons.filter} type="text" placeholder="filter pokemon" onChange={(e) => handleFilter(e.target.value)} value={search}/>
+      <input
+        className={commons.filter}
+        type="text"
+        placeholder="filter pokemon"
+        onChange={(e) => handleFilter(e.target.value)}
+        value={search}
+      />
       <div className={styles.iconContainer}>
         {visiblePokemons
-        .slice(
+          .slice(
             page * pageSize,
             Math.min(page * pageSize + pageSize, pokemons.length)
-        ).map((pokemon, i) => (
-          <PokemonIcon key={i} {...pokemon} />
-        ))}
+          )
+          .map((pokemon, i) => (
+            <PokemonIcon key={i} {...pokemon} />
+          ))}
       </div>
       <PageChanger />
     </div>
