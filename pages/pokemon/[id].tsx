@@ -29,6 +29,7 @@ const PokeView: NextPage<Props> = ({ pokemonList }) => {
       const pokes = await Promise.allSettled(
         String(id)
           .split(",")
+          .filter(p => Boolean(p.trim()))
           .map(async (p) => await getPokemon(String(p)))
       );
       const filtered: IPokemon[] = [];
