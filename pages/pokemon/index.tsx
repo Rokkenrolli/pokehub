@@ -71,9 +71,9 @@ const PokemonHome: NextPage<PokemonProps> = ({
   };
 
   const handleFilter = (value: string) => {
-    const trimmed = value.toLowerCase().trim();
+    const trimmed = value.trim();
     const newPokemon = pokemons.filter((p) => {
-      return p.name.toLowerCase().includes(trimmed);
+      return p.name.toLowerCase().includes(trimmed.toLowerCase());
     });
     setPage(0);
     setSearch(trimmed);
