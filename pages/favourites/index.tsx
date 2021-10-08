@@ -19,7 +19,6 @@ const FavoritePage: NextPage<Props> = ({ favourites }) => {
       {!session && (
         <h1>
           Please sign in to see your favourites
-          <br />
           <Link href="/">
             <a className={styles.button}>Home</a>
           </Link>
