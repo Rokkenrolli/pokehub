@@ -24,8 +24,6 @@ const Pokemon: React.FC<PokeViewProps> = ({
 }) => {
   const [pokemonData, setPokemonData] = useState<IPokemon>(pokemon);
 
- 
-
   const changeValue = (e: string | null, key: string) => {
     if (!e) {
       return;
@@ -34,8 +32,6 @@ const Pokemon: React.FC<PokeViewProps> = ({
     console.log(keys);
     console.log(e);
   };
-
-
 
   const statData = {
     label: "ability scores",
@@ -51,7 +47,6 @@ const Pokemon: React.FC<PokeViewProps> = ({
   };
   return (
     <div className={styles["pokemon-container"]}>
-      
       <Favourite pokemonId={pokemon.id} name={pokemon.name} />
       <h1 className={styles.name}>
         {" "}
@@ -72,10 +67,10 @@ const Pokemon: React.FC<PokeViewProps> = ({
             className={editMode ? styles.textActive : ""}
             contentEditable={editMode}
           >
-            {pokemonData.height}
+            {pokemonData.height * 10}
           </span>
-        }
-        &#39;
+        }{" "}
+        cm
       </h3>
       <h3 className={styles.weight}>
         {" "}
@@ -85,10 +80,10 @@ const Pokemon: React.FC<PokeViewProps> = ({
             className={editMode ? styles.textActive : ""}
             contentEditable={editMode}
           >
-            {pokemonData.weight}
+            {pokemonData.weight / 10}
           </span>
         }{" "}
-        lbs{" "}
+        kg{" "}
       </h3>
       <img
         className={styles.image}
